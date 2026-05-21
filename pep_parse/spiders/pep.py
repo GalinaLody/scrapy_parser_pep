@@ -18,6 +18,8 @@ class PepSpider(scrapy.Spider):
         data = {
             'number': int(number_name_pep.re_first(r"PEP\s*(\d+)")),
             'name': number_name_pep.re_first(r"PEP\s*\d+\s*–\s*(.*)"),
-            'status': response.css('dt:contains("Status") + dd abbr::text').get(),
+            'status': response.css(
+                'dt:contains("Status") + dd abbr::text'
+            ).get(),
         }
         yield PepParseItem(data)
