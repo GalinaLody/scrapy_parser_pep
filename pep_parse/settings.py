@@ -1,15 +1,22 @@
-from pep_parse.constants import NAME_RESULTS_DIR, SPIDERS_MODULE
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).parent.parent
+NAME_RESULTS_DIR = 'results'
+RESULTS_DIR = BASE_DIR / NAME_RESULTS_DIR
+
 
 BOT_NAME = 'pep_parse'
 
-SPIDER_MODULES = [SPIDERS_MODULE]
-NEWSPIDER_MODULE = SPIDERS_MODULE
+NEWSPIDER_MODULE = 'pep_parse.spiders'
+SPIDER_MODULES = [NEWSPIDER_MODULE]
+
 
 ROBOTSTXT_OBEY = True
 
 FEED_EXPORT_ENCODING = 'utf-8'
 FEEDS = {
-    NAME_RESULTS_DIR+'/pep_%(time)s.csv': {
+    f'{NAME_RESULTS_DIR}/pep_%(time)s.csv': {
         'format': 'csv',
         'fields': ['number', 'name', 'status'],
         'overwrite': True
